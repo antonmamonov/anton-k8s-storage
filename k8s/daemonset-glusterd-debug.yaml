@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: glusterd-debug
+  labels:
+    app: glusterd-debug
+spec:
+  selector:
+    matchLabels:
+      app: glusterd-debug
+  template:
+    metadata:
+      labels:
+        app: glusterd-debug
+    spec:
+      containers:
+      - name: main
+        image: antonm/antonstorage:v0.0.1
+        command: ["glusterd"]
+        args: ["--debug"]
+        securityContext:
+          privileged: true
+        ports:
+        - containerPort: 24007
+        - containerPort: 24008
+        - containerPort: 24009
+        # open up 12 more ports for the gluster bricks
+        - containerPort: 49152
+        - containerPort: 49153
+        - containerPort: 49154
+        - containerPort: 49155
+        - containerPort: 49156
+        - containerPort: 49157
+        - containerPort: 49158
+        - containerPort: 49159
+        - containerPort: 49160
+        - containerPort: 49161
+        - containerPort: 49162
+        - containerPort: 49163
